@@ -1,0 +1,41 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "../protos/Khepera4.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.442686813533218 0.4700789402783251 0.7635798419488382 1.778982013959201
+  position -0.002301503609558518 -2.0357771030712826 3.6608676285795543
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 2 2
+  wallHeight 0.2
+}
+DEF WALL_1 Solid {
+  translation 0.5 -0.1 0.05
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.02 0.98 0.1
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject USE WALL_SHAPE
+}
+Khepera4 {
+  controller "SGBA_Controller"
+}
