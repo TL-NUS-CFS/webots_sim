@@ -8,8 +8,8 @@
 EXTERNPROTO "Khepera4InfraredSensor.proto"
 
 PROTO Khepera4 [
-  field SFVec3f    translation         0 0 0                   # Is `Pose.translation`.
-  field SFRotation rotation            0 0 1 0                 # Is `Pose.rotation`.
+  field SFVec3f    translation         0 -0.8 0                   # Is `Pose.translation`.
+  field SFRotation rotation            0 0 1 1.57                 # Is `Pose.rotation`.
   field SFString   name                "Khepera IV"            # Is `Solid.name`.
   field SFString   controller          "<generic>"             # Is `Robot.controller`.
   field MFString   controllerArgs      []                      # Is `Robot.controllerArgs`.

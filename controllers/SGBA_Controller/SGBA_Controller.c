@@ -29,8 +29,8 @@
 
 #define MAX_SPEED 3
 #define NUMBER_OF_INFRARED_SENSORS 4
-#define WALL_DISTANCE 250
-#define DESIRED_HEADING_ANGLE -1.0
+#define WALL_DISTANCE 150
+#define DESIRED_HEADING_ANGLE 0.1
 
 // SGBA variables  
 float vel_x, vel_y, vel_w;
