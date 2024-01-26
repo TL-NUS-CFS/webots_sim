@@ -3,6 +3,8 @@
 1) Run the teste_puck.wbt world project
 2) Choose the SGBA_Controller for the Khepera IV robot if not already chosen
 
+![image](https://github.com/TL-NUS-CFS/webots_sim/assets/77558792/5047ae5b-c01c-4eaa-9474-fb7a5c3d2ec9)
+
 ## Outstanding bugs
 
 * Some of the below bugs are because of the way the motor activation is coded. Need to amend the motor activation to better reflect the intended action of SGBA algorithm.  
