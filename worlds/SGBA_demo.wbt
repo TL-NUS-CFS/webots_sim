@@ -9,7 +9,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.442686813533218 0.4700789402783251 0.7635798419488382 1.778982013959201
-  position -0.002301503609558518 -2.0357771030712826 3.6608676285795543
+  position 0.008452706972169663 -2.043413636963282 2.6759055083161534
 }
 TexturedBackground {
 }
@@ -20,7 +20,7 @@ RectangleArena {
   wallHeight 0.2
 }
 DEF WALL_1 Solid {
-  translation 0.5 -0.1 0.05
+  translation -0.64 -0.1 0.05
   children [
     DEF WALL_SHAPE Shape {
       appearance PBRAppearance {

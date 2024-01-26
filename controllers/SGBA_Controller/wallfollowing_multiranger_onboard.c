@@ -203,8 +203,8 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
     bool front_range_check = front_range < ref_distance_from_wall / (float)cos(0.78f) + 0.2f;
     printf("Side_range_check =%f, front_range_check = %f \n", side_range,front_range);
     //printf("Ref_distance: %f COS(0.78): %f \n",ref_distance_from_wall,(float)cos(0.78f));
-    printf("Side range goal = %f \n",ref_distance_from_wall / (float)cos(0.78f) + 0.2f );
-    if (side_range_check && front_range_check) {
+    printf("Side and Front range goal = %f \n",ref_distance_from_wall / (float)cos(0.78f) + 0.2f );
+    if (side_range_check && !front_range_check) {
       previous_heading = current_heading;
       angle = direction * (1.57f - (float)atan(front_range / side_range) + 0.1f);
       state = transition(4); // go to turn_to_allign_to_wall

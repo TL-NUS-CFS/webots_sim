@@ -29,7 +29,7 @@
 
 #define MAX_SPEED 3
 #define NUMBER_OF_INFRARED_SENSORS 4
-#define WALL_DISTANCE 150
+#define WALL_DISTANCE 250
 #define DESIRED_HEADING_ANGLE -0.7
 
 // SGBA variables  
@@ -139,15 +139,15 @@ int main(int argc, char **argv) {
     
     if (vel_w>0.1 || vel_w<-0.1 ) {
       wb_motor_set_velocity(right_motor, vel_w);
-      wb_motor_set_velocity(left_motor, 0.0);  
+      wb_motor_set_velocity(left_motor, -vel_w);  
     }
     else if ((state_wf==4 && state==3)){
       wb_motor_set_velocity(right_motor, MAX_SPEED);
-      wb_motor_set_velocity(left_motor, 0.0);  
+      wb_motor_set_velocity(left_motor, -MAX_SPEED);  
     }    
     else{
-      wb_motor_set_velocity(left_motor, MAX_SPEED);
-      wb_motor_set_velocity(right_motor, MAX_SPEED);
+      wb_motor_set_velocity(left_motor,  MAX_SPEED - 2 * vel_w * MAX_SPEED);
+      wb_motor_set_velocity(right_motor, MAX_SPEED + 2 * vel_w * MAX_SPEED);
     }
     // if (vel_y > 0.01){
     //   wb_motor_set_velocity(left_motor, MAX_SPEED+vel_y);
