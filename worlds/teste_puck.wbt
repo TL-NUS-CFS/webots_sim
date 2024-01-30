@@ -17,6 +17,7 @@ TexturedBackgroundLight {
 }
 RectangleArena {
   floorSize 2 2
+  floorTileSize 2 2
   wallHeight 0.2
 }
 DEF WALL_1 Solid {
@@ -111,4 +112,5 @@ Khepera4 {
 Khepera4 {
   translation -0.5 -0.7996 0
   name "Khepera IV(1)"
+  controller "SGBA_Controller"
 }

@@ -20,6 +20,7 @@
 #include <webots/distance_sensor.h>
 #include <webots/gps.h>
 #include <webots/led.h>
+#include <webots/pen.h>
 #include <webots/compass.h>
 #include "SGBA.h"
 #include <stdio.h>
@@ -82,6 +83,8 @@ int main(int argc, char **argv) {
   wb_motor_set_position(right_motor, INFINITY);
   wb_motor_set_velocity(left_motor, 0.0);
   wb_motor_set_velocity(right_motor, 0.0);
+
+  //WbDeviceTag = wb_robot_get_device("pen");
 
   // store the last time a message was displayed
   int last_display_second = 0;

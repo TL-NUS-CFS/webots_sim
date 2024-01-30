@@ -547,6 +547,28 @@ PROTO Khepera4 [
       Speaker {
         translation 0 0.029 0
       }
+      Pen {
+      translation 0 0 0.001
+      children [
+        Pose {
+          translation 0 0 0.07
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 1 0.692371 0
+                roughness 0.3707939685999999
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.05
+                radius 0.004
+              }
+            }
+          ]
+        }
+      ]
+      leadSize 0.01
+    }
     ]
     model "Khepera IV"
     contactMaterial IS bodyMaterial
