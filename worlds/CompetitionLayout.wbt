@@ -1,0 +1,273 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "../protos/Khepera4.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Parquetry.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5507535000361233 0.5548999263077401 0.6235035316512847 2.0198068731839482
+  position -0.7459907284903361 -9.268151025161071 43.36514762753763
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  name "mission area"
+  floorSize 20 20
+  floorAppearance Parquetry {
+    type "dark strip"
+    colorOverride 0.8 0.8 0.8
+  }
+  wallHeight 0.2
+}
+RectangleArena {
+  translation 0 -3.96 0
+  name "mission border"
+  floorSize 20 0.1
+  floorAppearance Parquetry {
+    type "light strip"
+    IBLStrength 50
+  }
+  wallThickness 1e-06
+  wallHeight 1e-07
+}
+RectangleArena {
+  translation 0 -6.97 0.001
+  name "takeoff area"
+  floorSize 10 4
+  floorAppearance Parquetry {
+    type "light strip"
+    colorOverride 0 0 0
+    IBLStrength 10
+  }
+  wallThickness 0.0001
+  wallHeight 1e-06
+}
+DEF WALL_1 Solid {
+  translation 6.68 7.01 0.05
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.2 6 1.5
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_1 Solid {
+  translation -6.29 7.01 0.05
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.2 6 1.5
+      }
+    }
+  ]
+  name "solid(6)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_1 Solid {
+  translation -1.83 4.16 0.05
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.2 6 1.5
+      }
+    }
+  ]
+  name "solid(9)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_1 Solid {
+  translation 2.03 0.93 0.05
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.2 6 1.5
+      }
+    }
+  ]
+  name "solid(10)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_4 Solid {
+  translation 6.71 0.73 0.05
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.2 1.5 1.5
+      }
+    }
+  ]
+  name "solid(4)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_4 Solid {
+  translation 8.34 0.090006 0.05
+  rotation 0 0 1 1.5708
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.2 3.4 1.5
+      }
+    }
+  ]
+  name "solid(2)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_4 Solid {
+  translation -8.11 0.089947 0.05
+  rotation 0 0 1 1.5708
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.2 3.8 1.5
+      }
+    }
+  ]
+  name "solid(3)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_4 Solid {
+  translation -6.23 0.73 0.05
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.2 1.5 1.5
+      }
+    }
+  ]
+  name "solid(7)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_4 Solid {
+  translation 0.12 -2.07 0.05
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.2 4 1.5
+      }
+    }
+  ]
+  name "solid(5)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_4 Solid {
+  translation 0.12 7.05 0.05
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.2 4 1.5
+      }
+    }
+  ]
+  name "solid(8)"
+  boundingObject USE WALL_SHAPE
+}
+Khepera4 {
+  translation -3.47372 -5.5572 0
+  controller "SGBA_Controller"
+}
+Khepera4 {
+  translation -2.53372 -5.55787 0.1
+  name "Khepera IV(2)"
+  controller "SGBA_Controller"
+}
+Khepera4 {
+  translation -1.57372 -5.55863 0.1
+  name "Khepera IV(3)"
+  controller "SGBA_Controller"
+}
+Khepera4 {
+  translation -0.65372 -5.55928 0.1
+  name "Khepera IV(4)"
+  controller "SGBA_Controller"
+}
+Khepera4 {
+  translation 0.27628 -5.56014 0.1
+  name "Khepera IV(5)"
+  controller "SGBA_Controller"
+}
+Khepera4 {
+  translation 1.18628 -5.56079 0.1
+  name "Khepera IV(6)"
+  controller "SGBA_Controller"
+}
+Khepera4 {
+  translation 2.07628 -5.56164 0
+  name "Khepera IV(9)"
+  controller "SGBA_Controller"
+}
+Khepera4 {
+  translation 2.94628 -5.56223 0.1
+  name "Khepera IV(7)"
+  controller "SGBA_Controller"
+}
+Khepera4 {
+  translation 3.87628 -5.56298 0.1
+  name "Khepera IV(8)"
+  controller "SGBA_Controller"
+}
+Khepera4 {
+  translation -4.41377 -5.51642 0
+  name "Khepera IV(1)"
+  controller "SGBA_Controller"
+}
