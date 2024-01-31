@@ -8,5 +8,6 @@ build/release/SGBA_Controller.o: SGBA_Controller.c \
  C:\Users\liewy\AppData\Local\Programs\Webots/include/controller/c/webots/distance_sensor.h \
  C:\Users\liewy\AppData\Local\Programs\Webots/include/controller/c/webots/gps.h \
  C:\Users\liewy\AppData\Local\Programs\Webots/include/controller/c/webots/led.h \
+ C:\Users\liewy\AppData\Local\Programs\Webots/include/controller/c/webots/pen.h \
  C:\Users\liewy\AppData\Local\Programs\Webots/include/controller/c/webots/compass.h \
  SGBA.h

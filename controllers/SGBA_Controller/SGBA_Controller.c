@@ -26,7 +26,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+//#define DEBUG
 
 #define MAX_SPEED 3
 #define NUMBER_OF_INFRARED_SENSORS 4
@@ -50,7 +50,11 @@ int main(int argc, char **argv) {
 
   int time_step = (int)wb_robot_get_basic_time_step();
   int i;
-  init_SGBA_controller(WALL_DISTANCE, MAX_SPEED, DESIRED_HEADING_ANGLE);
+  const char *robot_name = wb_robot_get_name();
+  int robot_id = atoi(robot_name);
+  float desired_angle = (3.14/2) - ((robot_id % 4) * 3.14 / 4 );
+  printf("robot desired angle: %f\n", desired_angle);
+  init_SGBA_controller(WALL_DISTANCE, MAX_SPEED, desired_angle);
 
   // get and enable the camera
   WbDeviceTag camera = wb_robot_get_device("camera");
@@ -106,13 +110,17 @@ int main(int argc, char **argv) {
     if (display_second != last_display_second) {
       last_display_second = display_second;
 
+      #ifdef DEBUG
       printf("time = %d [s]\n", display_second);
+      #endif
       //for (i = 0; i < 5; ++i)
       //  printf("- ultrasonic sensor('%s') = %f [m]\n", ultrasonic_sensors_names[i],
       //         wb_distance_sensor_get_value(ultrasonic_sensors[i]));
       for (i = 0; i < NUMBER_OF_INFRARED_SENSORS; i++)
+        #ifdef DEBUG
         printf("- infrared sensor('%s') = %f [m]\n", infrared_sensors_names[i],
                wb_distance_sensor_get_value(infrared_sensors[i]));
+               #endif
 
       for (i = 0; i < 3; ++i)
         wb_led_set(leds[i], 0xFFFFFF & rand());
@@ -128,7 +136,9 @@ int main(int argc, char **argv) {
     range_right_value = wb_distance_sensor_get_value(infrared_sensors[2]);
     range_back_value = wb_distance_sensor_get_value(infrared_sensors[3]);
     float heading = (float)get_bearing_in_degrees();
+    #ifdef DEBUG
     printf("bearing in rad: %f\n", heading);
+    #endif
     //float heading = 0.0;
     int state = SGBA_controller(&vel_x, &vel_y, &vel_w, &rssi_angle, &state_wf,
                     range_front_value, range_left_value, range_right_value, range_back_value,
@@ -137,8 +147,9 @@ int main(int argc, char **argv) {
                     // rssi
                     60,60,0.0, 
                     false, true);
-                    
+    #ifdef DEBUG
     printf("Vel_X = %f, Vel_Y = %f, Vel_W = %f\n", vel_x,vel_y,vel_w);
+    #endif
     
     if (vel_w>0.1 || vel_w<-0.1 ) {
       wb_motor_set_velocity(right_motor, vel_w);

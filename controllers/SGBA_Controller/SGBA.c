@@ -14,6 +14,8 @@
 
 #include <sys/time.h>
 
+//#define DEBUG
+
 
 static float state_start_time;
 
@@ -244,12 +246,16 @@ int SGBA_controller(float *vel_x, float *vel_y, float *vel_w, float *rssi_angle,
 
 // if looping is detected, reverse direction (only on outbound)
       if (overwrite_and_reverse_direction) {
+        #ifdef DEBUG
         printf("OVERWRITE AND REVERSE DIRECTION\n");
+        #endif
         direction = -1.0f * direction;
         overwrite_and_reverse_direction = false;
       } else {
         if (left_range < right_range && left_range < 2.0f) {
+          #ifdef DEBUG
           printf("left_range: %f right_range: %f \n", left_range,right_range);
+          #endif
           direction = -1.0f;
         } else if (left_range > right_range && right_range < 2.0f) {
           direction = 1.0f;
@@ -424,7 +430,9 @@ int SGBA_controller(float *vel_x, float *vel_y, float *vel_w, float *rssi_angle,
     } else {
       state_wf = wall_follower(&temp_vel_x, &temp_vel_y, &temp_vel_w, front_range, right_range, current_heading, direction);
     }
+    #ifdef DEBUG
     printf("state_wf is now %d\n", state_wf);
+    #endif
   } else if (state == 4) {      //MOVE_AWAY
 
     float save_distance = 0.7f;
@@ -450,6 +458,8 @@ int SGBA_controller(float *vel_x, float *vel_y, float *vel_w, float *rssi_angle,
   *vel_x = temp_vel_x;
   *vel_y = temp_vel_y;
   *vel_w = temp_vel_w;
+  #ifdef DEBUG
   printf("SGBA state is now %d\n", state);
+  #endif
   return state;
 }

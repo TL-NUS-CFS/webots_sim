@@ -10,6 +10,7 @@
 #include <sys/time.h>
 #include <stdio.h>
 
+//#define DEBUG
 
 // variables
 static float ref_distance_from_wall = 0;
@@ -61,7 +62,9 @@ static void commandTurn(float *vel_x, float *vel_w, float ref_rate)
 {
   *vel_x = 0.0;
   *vel_w = direction * ref_rate;
+  #ifdef DEBUG
   printf("Direction is %f ref rate is %f Vel_w is %f\n", direction, ref_rate, *vel_w);
+  #endif
 
 }
 
@@ -111,17 +114,25 @@ static void commandTurnAroundCornerAndAdjust(float *vel_x, float *vel_y, float *
   *vel_x = max_speed;
   *vel_w = direction * (-1 * (*vel_x) / radius);
   bool check_distance_to_wall = logicIsCloseTo(ref_distance_from_wall, range, 0.1);
+  #ifdef DEBUG
   printf("Checking distance to wall: %f against reference: %f\n", range,ref_distance_from_wall);
+  #endif
   if (!check_distance_to_wall) {
+    #ifdef DEBUG
     printf("Distance close ");
+    #endif
     if (range > ref_distance_from_wall) {
+      #ifdef DEBUG
       printf("Range too far\n");
+      #endif
       *vel_y = direction * (-1 * max_speed / 3);
 
     }
 
     else {
+      #ifdef DEBUG
       printf("Range too near\n");
+      #endif
       *vel_y = direction * (max_speed / 3);
 
     }
@@ -201,9 +212,13 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
     // check if wall is found
     bool side_range_check = side_range < ref_distance_from_wall / (float)cos(0.78f) + 0.2f;
     bool front_range_check = front_range < ref_distance_from_wall / (float)cos(0.78f) + 0.2f;
+    #ifdef DEBUG
     printf("Side_range_check =%f, front_range_check = %f \n", side_range,front_range);
+    #endif
     //printf("Ref_distance: %f COS(0.78): %f \n",ref_distance_from_wall,(float)cos(0.78f));
+    #ifdef DEBUG
     printf("Side and Front range goal = %f \n",ref_distance_from_wall / (float)cos(0.78f) + 0.2f );
+    #endif
     if (side_range_check && !front_range_check) {
       previous_heading = current_heading;
       angle = direction * (1.57f - (float)atan(front_range / side_range) + 0.1f);
@@ -217,7 +232,9 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
     }
   } else if (state == 4) { //TURN_TO_ALLIGN_TO_WALL
     bool allign_wall_check = logicIsCloseTo(wraptopi(current_heading - previous_heading), angle, 0.1f);
+    #ifdef DEBUG
     printf("checking angle change : %f against angle desired : %f\n",wraptopi(current_heading - previous_heading),angle );
+    #endif
     if (allign_wall_check) {
       // prev_side_range = side_range;
       state = transition(5);
@@ -246,7 +263,9 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
   } else if (state == 7) {   //ROTATE_IN_CORNER
     // Check if heading goes over 0.8 rad
     bool check_heading_corner = logicIsCloseTo(fabs(wraptopi(current_heading - previous_heading)), 0.8f, 0.1f);
+    #ifdef DEBUG
     printf("checking angle change : %f if more than 0.8 rad\n",wraptopi(current_heading - previous_heading) );
+    #endif
     if (check_heading_corner) {
       state = transition(3);
     }
@@ -308,20 +327,28 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
     // if side range is larger than prefered distance from wall
     
     if (side_range > ref_distance_from_wall + 0.5f) {
+      #ifdef DEBUG
       printf("Lost corner\n");
+      #endif
       // check if scanning has already occured
       if (wraptopi(fabs(current_heading - previous_heading)) > 0.8f) {
         around_corner_go_back = true;
+        #ifdef DEBUG
         printf("AROUND CORNER GO BACK\n");
+        #endif
       }
       // turn and adjust distnace to corner from that point
       if (around_corner_go_back) {
         // go back if it already went into one direction
+        #ifdef DEBUG
         printf("GOING BACK\n");
+        #endif
         commandTurnAndAdjust(&temp_vel_y, &temp_vel_w,max_rate, side_range);
         temp_vel_x = 0.0f;
       } else {
+        #ifdef DEBUG
         printf("TURNING\n");
+        #endif
         commandTurnAndAdjust(&temp_vel_y, &temp_vel_w, -1 * max_rate, side_range);
         temp_vel_x = 0.0f;
       }
@@ -330,8 +357,11 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
       previous_heading = current_heading;
       around_corner_go_back = false;
       commandTurnAroundCornerAndAdjust(&temp_vel_x, &temp_vel_y, &temp_vel_w, ref_distance_from_wall, side_range);
+      #ifdef DEBUG
       printf("Command Turn Corner\n");
+      
       printf("Side range: %f\n", side_range);
+      #endif
     }
 
   } else if (state == 7) {     //ROTATE_IN_CORNER
