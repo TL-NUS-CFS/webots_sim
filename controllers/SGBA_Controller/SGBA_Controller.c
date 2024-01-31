@@ -32,6 +32,7 @@
 #define NUMBER_OF_INFRARED_SENSORS 4
 #define WALL_DISTANCE 250
 #define DESIRED_HEADING_ANGLE -0.7
+#define HEADING_INCREMENT 4
 
 // SGBA variables  
 float vel_x, vel_y, vel_w;
@@ -52,7 +53,7 @@ int main(int argc, char **argv) {
   int i;
   const char *robot_name = wb_robot_get_name();
   int robot_id = atoi(robot_name);
-  float desired_angle = (3.14/2) - ((robot_id % 4) * 3.14 / 4 );
+  float desired_angle = (3.14/2) - ((robot_id % HEADING_INCREMENT) * 3.14 / HEADING_INCREMENT );
   printf("robot desired angle: %f\n", desired_angle);
   init_SGBA_controller(WALL_DISTANCE, MAX_SPEED, desired_angle);
 
