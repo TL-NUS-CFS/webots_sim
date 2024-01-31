@@ -9,10 +9,15 @@
 
 * Some of the below bugs are because of the way the motor activation is coded. Need to amend the motor activation to better reflect the intended action of SGBA algorithm.  
  * Crashes if encounter wall at an angle
- * If lose wall, will keep turning indefinitely
+ * If lose wall, will keep turning indefinitely (also behaviour observed IRL) (see closer)
  * Turning is not optimal (also due to being non holonomic)
+ * Sometimes will get stuck at wall due to crash
 
 ## To be implemented
-* Loop detection
-* Reheading 
-* Dynamic desired heading
+* Loop detection + Reheading
+* ~~Dynamic desired heading~~
+* Clockwise/AntiClockwise WallFollowing + CA Highway
+
+
+## To be checked
+* Simulation, distance, robot scale
