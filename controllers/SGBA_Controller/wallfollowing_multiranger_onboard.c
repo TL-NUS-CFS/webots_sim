@@ -10,7 +10,7 @@
 #include <sys/time.h>
 #include <stdio.h>
 
-//#define DEBUG
+#define DEBUG
 
 // variables
 static float ref_distance_from_wall = 0;
@@ -27,6 +27,9 @@ void wall_follower_init(float new_ref_distance_from_wall, float max_speed_ref, i
 {
   ref_distance_from_wall = new_ref_distance_from_wall;
   max_speed = max_speed_ref;
+  //Kimberly's code defines a "max_rate" as an unchanging static variable. 
+  //This is used for stuff like turning, different from max_speed.
+  //Here I want to change and define it
   max_rate = max_speed_ref;
   first_run = true;
   state = init_state;
@@ -154,7 +157,7 @@ static int transition(int new_state)
   unsigned long long microseconds = tv.tv_sec * 1000000 + tv.tv_usec;
   float t = (float)microseconds / 1e6;  
   state_start_time = t;
-  printf("TRANSITIONING FROM STATE %d TO STATE %d>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n", state, new_state);
+  printf("TRANSITIONING FROM STATE %d TO STATE %d>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n", state, new_state);
   return new_state;
 }
 
@@ -221,6 +224,7 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
     #endif
     if (side_range_check && !front_range_check) {
       previous_heading = current_heading;
+      front_range = fmin(front_range, ref_distance_from_wall);
       angle = direction * (1.57f - (float)atan(front_range / side_range) + 0.1f);
       state = transition(4); // go to turn_to_allign_to_wall
     }
@@ -244,6 +248,7 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
     // If side range is out of reach,
     //    end of the wall is reached
     if (side_range > ref_distance_from_wall + 0.3f) {
+      printf("side range is %f\n",side_range);
       //  around_corner_first_turn = true;
       state = transition(8);
     }
@@ -350,7 +355,7 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
         printf("TURNING\n");
         #endif
         commandTurnAndAdjust(&temp_vel_y, &temp_vel_w, -1 * max_rate, side_range);
-        temp_vel_x = 0.0f;
+        temp_vel_x = 1.0f;
       }
     } else {
       // continue to turn around corner

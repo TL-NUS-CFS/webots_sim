@@ -14,7 +14,7 @@
 
 #include <sys/time.h>
 
-//#define DEBUG
+#define DEBUG
 
 
 static float state_start_time;
@@ -24,6 +24,8 @@ static float state_start_time;
 static bool first_run = true;
 static float ref_distance_from_wall = 0;
 static float max_speed = 0.5;
+static float local_direction = 1;
+
 
 //Make variable
 uint8_t rssi_threshold = 58;// normal batteries 50/52/53/53 bigger batteries 55/57/59
@@ -167,11 +169,12 @@ static float fillHeadingArray(uint8_t *correct_heading_array, float rssi_heading
 static float wanted_angle = 0;
 
 void init_SGBA_controller(float new_ref_distance_from_wall, float max_speed_ref,
-                                       float begin_wanted_heading)
+                                       float begin_wanted_heading, float starting_local_direction)
 {
   ref_distance_from_wall = new_ref_distance_from_wall;
   max_speed = max_speed_ref;
   wanted_angle = begin_wanted_heading;
+  local_direction = starting_local_direction;
   first_run = true;
 }
 
@@ -283,7 +286,7 @@ int SGBA_controller(float *vel_x, float *vel_y, float *vel_w, float *rssi_angle,
     bool goal_check = logicIsCloseTo(wraptopi(current_heading - wanted_angle), 0, 0.1f);
     if (front_range < ref_distance_from_wall + 0.2f) {
       cannot_go_to_goal =  true;
-      wall_follower_init(ref_distance_from_wall, 0.5, 3);
+      wall_follower_init(ref_distance_from_wall, max_speed, 3);
 
       state = transition(3); //wall_following
 
@@ -319,7 +322,7 @@ int SGBA_controller(float *vel_x, float *vel_y, float *vel_w, float *rssi_angle,
     // Check if the goal is reachable from the current point of view of the agent
     float bearing_to_goal = wraptopi(wanted_angle - current_heading);
     bool goal_check_WF = false;
-    if (direction == -1) {
+    if (local_direction == -1) {
       goal_check_WF = (bearing_to_goal < 0 && bearing_to_goal > -1.5f);
     } else {
       goal_check_WF = (bearing_to_goal > 0 && bearing_to_goal < 1.5f);
@@ -336,7 +339,7 @@ int SGBA_controller(float *vel_x, float *vel_y, float *vel_w, float *rssi_angle,
 
 
     if (fabs(wraptopi(wanted_angle_hit + 3.14f - loop_angle)) < 1.0) {
-      overwrite_and_reverse_direction = false;
+      overwrite_and_reverse_direction = true;
     } else {
     }
 
@@ -411,7 +414,7 @@ int SGBA_controller(float *vel_x, float *vel_y, float *vel_w, float *rssi_angle,
     if (right_range < ref_distance_from_wall) {
       temp_vel_y = 0.2f;
     }
-    temp_vel_x = 0.5;
+    temp_vel_x =max_speed;
     //}
 
   } else  if (state == 2) {  //ROTATE_TO_GOAL
@@ -425,10 +428,11 @@ int SGBA_controller(float *vel_x, float *vel_y, float *vel_w, float *rssi_angle,
 
   } else  if (state == 3) {       //WALL_FOLLOWING
     //Get the values from the wallfollowing
-    if (direction == -1) {
-      state_wf = wall_follower(&temp_vel_x, &temp_vel_y, &temp_vel_w, front_range, left_range, current_heading, direction);
+    printf("direction is %f\n", local_direction);
+    if (local_direction == -1) {
+      state_wf = wall_follower(&temp_vel_x, &temp_vel_y, &temp_vel_w, front_range, left_range, current_heading, local_direction);
     } else {
-      state_wf = wall_follower(&temp_vel_x, &temp_vel_y, &temp_vel_w, front_range, right_range, current_heading, direction);
+      state_wf = wall_follower(&temp_vel_x, &temp_vel_y, &temp_vel_w, front_range, right_range, current_heading, local_direction);
     }
     #ifdef DEBUG
     printf("state_wf is now %d\n", state_wf);

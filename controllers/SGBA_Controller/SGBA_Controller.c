@@ -25,12 +25,14 @@
 #include "SGBA.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-//#define DEBUG
+
+#define DEBUG
 
 #define MAX_SPEED 3
 #define NUMBER_OF_INFRARED_SENSORS 4
-#define WALL_DISTANCE 250
+#define WALL_DISTANCE 200
 #define DESIRED_HEADING_ANGLE -0.7
 #define HEADING_INCREMENT 4
 
@@ -53,9 +55,13 @@ int main(int argc, char **argv) {
   int i;
   const char *robot_name = wb_robot_get_name();
   int robot_id = atoi(robot_name);
+  printf("robot id: %d\n", robot_id);
   float desired_angle = (3.14/2) - ((robot_id % HEADING_INCREMENT) * 3.14 / HEADING_INCREMENT );
   printf("robot desired angle: %f\n", desired_angle);
-  init_SGBA_controller(WALL_DISTANCE, MAX_SPEED, desired_angle);
+  printf("robot_id mod 2 = %d\n", robot_id % 2);
+  float direction = (robot_id % 2 == 0) ? -1 : 1;
+  printf("robot direction: %f\n", direction);
+  init_SGBA_controller(WALL_DISTANCE, MAX_SPEED, desired_angle, direction);
 
   // get and enable the camera
   WbDeviceTag camera = wb_robot_get_device("camera");
@@ -103,7 +109,7 @@ int main(int argc, char **argv) {
     //   bearing = bearing + 360.0;
     return -bearing;
   }
-  // main loop
+  // MAIN loop
   while (wb_robot_step(time_step) != -1) {
     // display some sensor data every second
     // and change randomly the led colors
@@ -151,15 +157,20 @@ int main(int argc, char **argv) {
     #ifdef DEBUG
     printf("Vel_X = %f, Vel_Y = %f, Vel_W = %f\n", vel_x,vel_y,vel_w);
     #endif
-    
+    //any turning
     if (vel_w>0.1 || vel_w<-0.1 ) {
       wb_motor_set_velocity(right_motor, vel_w);
       wb_motor_set_velocity(left_motor, -vel_w);  
     }
+    ///turn to find wall (does not have vel_w)
     else if ((state_wf==4 && state==3)){
-      wb_motor_set_velocity(right_motor, MAX_SPEED);
-      wb_motor_set_velocity(left_motor, -MAX_SPEED);  
-    }    
+      wb_motor_set_velocity(right_motor, direction * MAX_SPEED);
+      wb_motor_set_velocity(left_motor, -direction * MAX_SPEED);  
+    }   
+    // else if (vel_y>0.1||vel_y<-0.1){
+    //   wb_motor_set_velocity(left_motor,  MAX_SPEED-0.05*vel_y);
+    //   wb_motor_set_velocity(right_motor, MAX_SPEED+0.05*vel_y);
+    // } 
     else{
       wb_motor_set_velocity(left_motor,  MAX_SPEED - 2 * vel_w * MAX_SPEED);
       wb_motor_set_velocity(right_motor, MAX_SPEED + 2 * vel_w * MAX_SPEED);
@@ -168,6 +179,8 @@ int main(int argc, char **argv) {
     //   wb_motor_set_velocity(left_motor, MAX_SPEED+vel_y);
     //   wb_motor_set_velocity(right_motor, MAX_SPEED);
     // }
+
+    //sleep(0.5);
   };
 
   wb_robot_cleanup();

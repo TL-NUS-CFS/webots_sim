@@ -7,4 +7,4 @@ centralWidgetVisible: 1
 orthographicViewHeight: 1
 textFiles: 4 "controllers/khepera_controller/khepera_controller.c" "protos/Khepera4.proto" "protos/Khepera4InfraredSensor.proto" "controllers/khepera_test/khepera_test.c" "controllers/SGBA_Controller/SGBA_Controller.c" "controllers/SGBA_Controller/wallfollowing_multiranger_onboard.c"
 consoles: Console:All:All
-renderingDevicePerspectives: Khepera IV:camera;1;0.895833;0;0
+renderingDevicePerspectives: 2:camera;1;0.895833;0;0

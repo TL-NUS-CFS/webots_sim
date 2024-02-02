@@ -9,18 +9,20 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.442686813533218 0.4700789402783251 0.7635798419488382 1.778982013959201
-  position 0.008452706972169663 -2.043413636963282 2.6759055083161534
+  position -0.06880689691749133 -3.329695031672486 4.926506159862581
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 RectangleArena {
-  floorSize 2 2
+  floorSize 3 3
+  floorTileSize 3 3
   wallHeight 0.2
 }
 DEF WALL_1 Solid {
-  translation -0.64 -0.1 0.05
+  translation 0.03 -0.0999983 0.05
+  rotation 0 0 1 -1.5707953071795862
   children [
     DEF WALL_SHAPE Shape {
       appearance PBRAppearance {
@@ -37,5 +39,6 @@ DEF WALL_1 Solid {
   boundingObject USE WALL_SHAPE
 }
 Khepera4 {
+  name "2"
   controller "SGBA_Controller"
 }
