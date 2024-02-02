@@ -12,6 +12,7 @@
  * If lose wall, will keep turning indefinitely (also behaviour observed IRL) (see closer)
  * Turning is not optimal (also due to being non holonomic)
  * Sometimes will get stuck at wall due to crash
+ * Often loses corner when turning around wall
 
 ## To be implemented
 * Loop detection + Reheading
