@@ -12,12 +12,13 @@
  * If lose wall, will keep turning indefinitely (also behaviour observed IRL) (see closer)
  * Turning is not optimal (also due to being non holonomic)
  * Sometimes will get stuck at wall due to crash
- * Often loses corner when turning around wall
+ * ~~Often loses corner when turning around wall~~
+ * going forward, if near side wall, it will think it is encountering wall at angle
 
 ## To be implemented
 * Loop detection + Reheading
 * ~~Dynamic desired heading~~
-* Clockwise/AntiClockwise WallFollowing + CA Highway
+* ~~Clockwise/AntiClockwise WallFollowing~~ + CA Highway
 
 
 ## To be checked
