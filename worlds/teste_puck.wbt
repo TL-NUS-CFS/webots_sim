@@ -108,7 +108,6 @@ DEF WALL_5 Solid {
 Khepera4 {
   translation 0.48 -0.800384 0
   name "1"
-  controller "SGBA_Controller"
 }
 Khepera4 {
   translation -0.5 -0.7996 0

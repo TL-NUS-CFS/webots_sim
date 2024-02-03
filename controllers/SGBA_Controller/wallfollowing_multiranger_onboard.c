@@ -20,6 +20,7 @@ static float direction = 1;
 static float first_run = false;
 static int state = 1;
 static float state_start_time;
+static float factor = 1;
 
 
 
@@ -213,18 +214,18 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
 
   } else if (state == 3) { // TURN_TO_FIND_WALL
     // check if wall is found
-    bool side_range_check = side_range < ref_distance_from_wall / (float)cos(0.78f) + 0.2f;
-    bool front_range_check = front_range < ref_distance_from_wall / (float)cos(0.78f) + 0.2f;
+    bool side_range_check = side_range < (ref_distance_from_wall+0.2f) / (float)cos(0.78f) + 0.1f;
+    bool front_range_check = front_range < (ref_distance_from_wall+0.2f) / (float)cos(0.78f) + 0.1f;
     #ifdef DEBUG
     printf("Side_range_check =%f, front_range_check = %f \n", side_range,front_range);
     #endif
     //printf("Ref_distance: %f COS(0.78): %f \n",ref_distance_from_wall,(float)cos(0.78f));
     #ifdef DEBUG
-    printf("Side and Front range goal = %f \n",ref_distance_from_wall / (float)cos(0.78f) + 0.2f );
+    printf("Side and Front range goal = %f \n",(ref_distance_from_wall+0.2f) / (float)cos(0.78f) + 0.1f );
     #endif
-    if (side_range_check && !front_range_check) {
+    if (side_range_check && front_range_check) {
       previous_heading = current_heading;
-      front_range = fmin(front_range, ref_distance_from_wall);
+      //front_range = fmin(front_range, ref_distance_from_wall);
       angle = direction * (1.57f - (float)atan(front_range / side_range) + 0.1f);
       state = transition(4); // go to turn_to_allign_to_wall
     }
@@ -248,7 +249,7 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
     // If side range is out of reach,
     //    end of the wall is reached
     if (side_range > ref_distance_from_wall + 0.3f) {
-      printf("side range is %f\n",side_range);
+      printf("side range too far from wall is %f\n",side_range);
       //  around_corner_first_turn = true;
       state = transition(8);
     }
@@ -330,7 +331,6 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
     //first try to find the corner again
 
     // if side range is larger than prefered distance from wall
-    
     if (side_range > ref_distance_from_wall + 0.5f) {
       #ifdef DEBUG
       printf("Lost corner\n");
@@ -355,7 +355,7 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
         printf("TURNING\n");
         #endif
         commandTurnAndAdjust(&temp_vel_y, &temp_vel_w, -1 * max_rate, side_range);
-        temp_vel_x = 1.0f;
+        //temp_vel_x = 1.0f;
       }
     } else {
       // continue to turn around corner
