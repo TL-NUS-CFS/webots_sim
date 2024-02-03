@@ -31,12 +31,12 @@ PROTO Khepera4InfraredSensor [
     %{ if fields.shortRange.value then }%
     lookupTable [
       0 0 0
-      3.0 3000 0.0
+      3.0 3.0 0.0
     ]
     %{ else }%
     lookupTable [
       0 0 0
-      3.0 3000 0.0
+      3.0 3.0 0.0
     ]
     %{ end }%
   }
