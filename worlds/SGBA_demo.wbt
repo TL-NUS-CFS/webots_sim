@@ -8,8 +8,8 @@ EXTERNPROTO "../protos/Khepera4.proto"
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.442686813533218 0.4700789402783251 0.7635798419488382 1.778982013959201
-  position -0.06880689691749133 -3.329695031672486 4.926506159862581
+  orientation -0.41897260402834685 0.4025412314935266 0.8138934291548132 1.814294608999021
+  position 0.23742967954162605 -5.25084840981836 6.456363030245485
 }
 TexturedBackground {
 }
@@ -21,7 +21,7 @@ RectangleArena {
   wallHeight 0.2
 }
 DEF WALL_1 Solid {
-  translation 0.03 -0.0999983 0.05
+  translation -0.22 0.920002 0.05
   rotation 0 0 1 -1.5707953071795862
   children [
     DEF WALL_SHAPE Shape {
@@ -31,14 +31,69 @@ DEF WALL_1 Solid {
         metalness 0
       }
       geometry Box {
-        size 0.02 0.98 0.1
+        size 0.02 2 0.1
       }
     }
   ]
   name "solid(1)"
   boundingObject USE WALL_SHAPE
 }
+DEF WALL_1 Solid {
+  translation 0.66 -0.439998 0.05
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.02 2 0.1
+      }
+    }
+  ]
+  name "solid(3)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_1 Solid {
+  translation -1.17 0.190002 0.05
+  rotation 0 0 1 1.01503e-06
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.02 2 0.1
+      }
+    }
+  ]
+  name "solid(4)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_1 Solid {
+  translation 0.7 -0.079998 0.05
+  rotation 0 0 1 1.01503e-06
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.02 2 0.1
+      }
+    }
+  ]
+  name "solid(2)"
+  boundingObject USE WALL_SHAPE
+}
 Khepera4 {
+  translation -0.829848 -0.609336 0
   name "2"
   controller "SGBA_Controller"
 }

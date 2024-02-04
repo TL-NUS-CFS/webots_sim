@@ -10,7 +10,7 @@
 #include <sys/time.h>
 #include <stdio.h>
 
-#define DEBUG
+//#define DEBUG
 
 // variables
 static float ref_distance_from_wall = 0;
@@ -116,6 +116,7 @@ static void commandForwardAlongWall(float *vel_x, float *vel_y, float range)
 static void commandTurnAroundCornerAndAdjust(float *vel_x, float *vel_y, float *vel_w, float radius, float range)
 {
   *vel_x = max_speed;
+  radius = fmin(radius, ref_distance_from_wall*1.5);
   *vel_w = direction * (-1 * (*vel_x) / radius);
   bool check_distance_to_wall = logicIsCloseTo(ref_distance_from_wall, range, 0.1);
   #ifdef DEBUG
@@ -249,7 +250,9 @@ int wall_follower(float *vel_x, float *vel_y, float *vel_w, float front_range, f
     // If side range is out of reach,
     //    end of the wall is reached
     if (side_range > ref_distance_from_wall + 0.3f) {
+      #ifdef DEBUG
       printf("side range too far from wall is %f\n",side_range);
+      #endif
       //  around_corner_first_turn = true;
       state = transition(8);
     }

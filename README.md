@@ -14,6 +14,8 @@
  * Sometimes will get stuck at wall due to crash
  * ~~Often loses corner when turning around wall~~
  * going forward, if near side wall, it will think it is encountering wall at angle
+ * too many magic numbers
+ * some hard coded 0.8 turns are messing up angled turns
 
 ## To be implemented
 * Loop detection + Reheading

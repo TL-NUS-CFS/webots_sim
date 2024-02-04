@@ -28,9 +28,9 @@
 #include <unistd.h>
 
 
-#define DEBUG
+//#define DEBUG
 
-#define MAX_SPEED 3
+#define MAX_SPEED 5
 #define NUMBER_OF_INFRARED_SENSORS 4
 #define WALL_DISTANCE 0.1
 #define DESIRED_HEADING_ANGLE -0.7
@@ -124,10 +124,10 @@ int main(int argc, char **argv) {
       //  printf("- ultrasonic sensor('%s') = %f [m]\n", ultrasonic_sensors_names[i],
       //         wb_distance_sensor_get_value(ultrasonic_sensors[i]));
       for (i = 0; i < NUMBER_OF_INFRARED_SENSORS; i++)
-        #ifdef DEBUG
+        //#ifdef DEBUG
         printf("- infrared sensor('%s') = %f [m]\n", infrared_sensors_names[i],
                wb_distance_sensor_get_value(infrared_sensors[i]));
-               #endif
+          //     #endif
 
       for (i = 0; i < 3; ++i)
         wb_led_set(leds[i], 0xFFFFFF & rand());
@@ -154,9 +154,10 @@ int main(int argc, char **argv) {
                     // rssi
                     60,60,0.0, 
                     false, true);
-    #ifdef DEBUG
+    
     printf("Vel_X = %f, Vel_Y = %f, Vel_W = %f\n", vel_x,vel_y,vel_w);
-    #endif
+    printf("heading, x_global, y_global = %f, %f, %f\n", heading, x_global, y_global);
+    
     //any turning
     if (vel_w>0.1 || vel_w<-0.1 ) {
       wb_motor_set_velocity(right_motor, vel_w);
@@ -172,9 +173,13 @@ int main(int argc, char **argv) {
     //   wb_motor_set_velocity(right_motor, MAX_SPEED+0.05*vel_y);
     // } 
     else{
-      wb_motor_set_velocity(left_motor,  MAX_SPEED - 2 * vel_w * MAX_SPEED);
-      wb_motor_set_velocity(right_motor, MAX_SPEED + 2 * vel_w * MAX_SPEED);
+      wb_motor_set_velocity(left_motor,  MAX_SPEED - 2 * vel_w * MAX_SPEED - 0.05 * vel_y);
+      wb_motor_set_velocity(right_motor, MAX_SPEED + 2 * vel_w * MAX_SPEED + 0.05 * vel_y);
+      // wb_motor_set_velocity(left_motor,  MAX_SPEED);
+      // wb_motor_set_velocity(right_motor, MAX_SPEED);
     }
+    printf("left motor speed is %f\n", wb_motor_get_velocity(left_motor));
+    printf("right motor speed is %f\n", wb_motor_get_velocity(right_motor));
     // if (vel_y > 0.01){
     //   wb_motor_set_velocity(left_motor, MAX_SPEED+vel_y);
     //   wb_motor_set_velocity(right_motor, MAX_SPEED);
