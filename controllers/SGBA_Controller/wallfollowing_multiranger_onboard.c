@@ -27,6 +27,9 @@ void wall_follower_init(float new_ref_distance_from_wall, float max_speed_ref, i
 {
   ref_distance_from_wall = new_ref_distance_from_wall;
   max_speed = max_speed_ref;
+   //Kimberly's code defines a "max_rate" as an unchanging static variable. 
+  //This is used for stuff like turning, different from max_speed.
+  //Here I want to change and define it
   max_rate = max_speed_ref;
   first_run = true;
   state = init_state;

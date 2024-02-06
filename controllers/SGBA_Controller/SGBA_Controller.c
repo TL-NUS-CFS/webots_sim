@@ -25,6 +25,7 @@
 #include "SGBA.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 //#define DEBUG
 
@@ -55,7 +56,9 @@ int main(int argc, char **argv) {
   int robot_id = atoi(robot_name);
   float desired_angle = (3.14/2) - ((robot_id % HEADING_INCREMENT) * 3.14 / HEADING_INCREMENT );
   printf("robot desired angle: %f\n", desired_angle);
-  init_SGBA_controller(WALL_DISTANCE, MAX_SPEED, desired_angle);
+  float direction = (robot_id % 2 == 0) ? -1 : 1;
+  printf("robot direction: %f\n", direction);
+  init_SGBA_controller(WALL_DISTANCE, MAX_SPEED, desired_angle, direction);
 
   // get and enable the camera
   WbDeviceTag camera = wb_robot_get_device("camera");
