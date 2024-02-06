@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-//#define DEBUG
+#define DEBUG
 
 #define MAX_SPEED 3
 #define NUMBER_OF_INFRARED_SENSORS 4
@@ -160,8 +160,8 @@ int main(int argc, char **argv) {
       wb_motor_set_velocity(left_motor, -vel_w);  
     }
     else if ((state_wf==4 && state==3)){
-      wb_motor_set_velocity(right_motor, MAX_SPEED);
-      wb_motor_set_velocity(left_motor, -MAX_SPEED);  
+      wb_motor_set_velocity(right_motor, direction * MAX_SPEED);
+      wb_motor_set_velocity(left_motor, -direction * MAX_SPEED);  
     }    
     else{
       wb_motor_set_velocity(left_motor,  MAX_SPEED - 2 * vel_w * MAX_SPEED);

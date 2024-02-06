@@ -10,7 +10,7 @@
 #include <sys/time.h>
 #include <stdio.h>
 
-//#define DEBUG
+#define DEBUG
 
 // variables
 static float ref_distance_from_wall = 0;

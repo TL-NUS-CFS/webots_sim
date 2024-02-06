@@ -14,7 +14,7 @@
 
 #include <sys/time.h>
 
-//#define DEBUG
+#define DEBUG
 
 
 static float state_start_time;
