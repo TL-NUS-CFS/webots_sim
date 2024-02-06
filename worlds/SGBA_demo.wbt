@@ -8,19 +8,21 @@ EXTERNPROTO "../protos/Khepera4.proto"
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.442686813533218 0.4700789402783251 0.7635798419488382 1.778982013959201
-  position 0.008452706972169663 -2.043413636963282 2.6759055083161534
+  orientation -0.4633238983554391 0.44794560377473247 0.7646408969389547 1.868412793208229
+  position 0.5769220079061348 -3.1519702609996947 5.90262569007215
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 RectangleArena {
-  floorSize 2 2
+  floorSize 3 3
+  floorTileSize 3 3
   wallHeight 0.2
 }
 DEF WALL_1 Solid {
-  translation -0.64 -0.1 0.05
+  translation -0.22 0.920002 0.05
+  rotation 0 0 1 -1.5707953071795862
   children [
     DEF WALL_SHAPE Shape {
       appearance PBRAppearance {
@@ -29,13 +31,69 @@ DEF WALL_1 Solid {
         metalness 0
       }
       geometry Box {
-        size 0.02 0.98 0.1
+        size 0.02 2 0.1
       }
     }
   ]
   name "solid(1)"
   boundingObject USE WALL_SHAPE
 }
+DEF WALL_1 Solid {
+  translation 0.66 -0.439998 0.05
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.02 2 0.1
+      }
+    }
+  ]
+  name "solid(3)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_1 Solid {
+  translation -1.17 0.190002 0.05
+  rotation 0 0 1 1.01503e-06
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.02 2 0.1
+      }
+    }
+  ]
+  name "solid(4)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_1 Solid {
+  translation 0.7 -0.079998 0.05
+  rotation 0 0 1 1.01503e-06
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.02 2 0.1
+      }
+    }
+  ]
+  name "solid(2)"
+  boundingObject USE WALL_SHAPE
+}
 Khepera4 {
+  translation -0.829848 -0.609336 0
+  name "2"
   controller "SGBA_Controller"
 }
