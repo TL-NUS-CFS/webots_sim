@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define DEBUG
+//#define DEBUG
 
 #define MAX_SPEED 3
 #define NUMBER_OF_INFRARED_SENSORS 4
