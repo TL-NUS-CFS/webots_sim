@@ -57,6 +57,7 @@ int main(int argc, char **argv) {
   int robot_id = atoi(robot_name);
   printf("robot id: %d\n", robot_id);
   float desired_angle = (3.14/2) - ((robot_id % HEADING_INCREMENT) * 3.14 / HEADING_INCREMENT );
+  desired_angle = 0;
   printf("robot desired angle: %f\n", desired_angle);
   printf("robot_id mod 2 = %d\n", robot_id % 2);
   float direction = (robot_id % 2 == 0) ? -1 : 1;

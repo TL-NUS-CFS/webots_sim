@@ -9,8 +9,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.5507535000361233 0.5548999263077401 0.6235035316512847 2.0198068731839482
-  position -0.7459907284903361 -9.268151025161071 43.36514762753763
+  orientation -0.4961849360530545 0.4046619286488831 0.7681466218998769 2.022302254825646
+  position 0.15530873762802572 -12.50626789811481 20.43857588068909
 }
 TexturedBackground {
 }
@@ -19,8 +19,9 @@ TexturedBackgroundLight {
 RectangleArena {
   name "mission area"
   floorSize 20 20
+  floorTileSize 20 20
   floorAppearance Parquetry {
-    type "dark strip"
+    type "light strip"
     colorOverride 0.8 0.8 0.8
   }
   wallHeight 0.2
@@ -29,6 +30,7 @@ RectangleArena {
   translation 0 -3.96 0
   name "mission border"
   floorSize 20 0.1
+  floorTileSize 20 0.1
   floorAppearance Parquetry {
     type "light strip"
     IBLStrength 50
@@ -40,9 +42,9 @@ RectangleArena {
   translation 0 -6.97 0.001
   name "takeoff area"
   floorSize 10 4
+  floorTileSize 10 4
   floorAppearance Parquetry {
-    type "light strip"
-    colorOverride 0 0 0
+    type "dark strip"
     IBLStrength 10
   }
   wallThickness 0.0001
