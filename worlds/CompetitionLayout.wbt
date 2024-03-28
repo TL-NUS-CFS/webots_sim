@@ -9,8 +9,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.5507535000361233 0.5548999263077401 0.6235035316512847 2.0198068731839482
-  position -0.719049462399892 -5.6637648791279265 14.386149452880868
+  orientation -0.34674014866086483 0.34587586119329433 0.8718607445862201 1.709974332774274
+  position -0.4288228157064462 -26.330060970589184 23.77324406241481
 }
 TexturedBackground {
 }
@@ -225,52 +225,32 @@ DEF WALL_4 Solid {
   boundingObject USE WALL_SHAPE
 }
 Khepera4 {
-  translation -3.47372 -5.5572 0
-  name "1"
-  controller "SGBA_Controller"
-}
-Khepera4 {
-  translation -2.53372 -5.55787 0.1
-  name "2"
-  controller "SGBA_Controller"
-}
-Khepera4 {
-  translation -1.57372 -5.55863 0.1
-  name "3"
-  controller "SGBA_Controller"
-}
-Khepera4 {
-  translation -0.65372 -5.55928 0.1
-  name "4"
-  controller "SGBA_Controller"
-}
-Khepera4 {
-  translation 0.27628 -5.56014 0.1
+  translation -3.5 -5.5 0
   name "5"
   controller "SGBA_Controller"
 }
 Khepera4 {
-  translation 1.18628 -5.56079 0.1
-  name "6"
+  translation -1 -5.50039 0
+  name "10"
   controller "SGBA_Controller"
 }
 Khepera4 {
-  translation 2.07628 -5.56164 0
+  translation 3.5 -5.5 0
+  name "3"
+  controller "SGBA_Controller"
+}
+Khepera4 {
+  translation 1 -5.5 0
+  name "2"
+  controller "SGBA_Controller"
+}
+Khepera4 {
+  translation 4.5 -5.5 0
   name "7"
   controller "SGBA_Controller"
 }
 Khepera4 {
-  translation 2.94628 -5.56223 0.1
-  name "8"
-  controller "SGBA_Controller"
-}
-Khepera4 {
-  translation 3.87628 -5.56298 0.1
-  name "9"
-  controller "SGBA_Controller"
-}
-Khepera4 {
-  translation -4.41377 -5.51642 0
-  name "10"
+  translation -4.4 -5.5 0
+  name "1"
   controller "SGBA_Controller"
 }

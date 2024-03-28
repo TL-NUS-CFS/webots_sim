@@ -55,8 +55,10 @@ int main(int argc, char **argv) {
   const char *robot_name = wb_robot_get_name();
   int robot_id = atoi(robot_name);
   float desired_angle = (3.14/2) - ((robot_id % HEADING_INCREMENT) * 3.14 / HEADING_INCREMENT );
+  //desired_angle =(float) get_bearing_in_degrees();
   printf("robot desired angle: %f\n", desired_angle);
   float direction = (robot_id % 2 == 0) ? -1 : 1;
+  direction =(robot_id == 1 || robot_id == 5 ||robot_id==10)? -direction : direction;
   printf("robot direction: %f\n", direction);
   init_SGBA_controller(WALL_DISTANCE, MAX_SPEED, desired_angle, direction);
 
